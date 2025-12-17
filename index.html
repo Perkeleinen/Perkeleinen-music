@@ -10,43 +10,47 @@
 
   <script>
     const artistId = "0YjzmE35TqYNHAnIZS4wwq";
+    const spotifyDownloadUrl = "https://www.spotify.com/download/";
 
-    // Detect mobile devices
     function isMobile() {
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
 
-    // Open artist in Spotify app
     function openSpotify() {
       if (isMobile()) {
+        window.location.href = `spotify:artist:${artistId}`;
+      } else {
         const now = Date.now();
         window.location.href = `spotify:artist:${artistId}`;
         setTimeout(() => {
-          if (Date.now() - now < 2000) {
-            window.location.href = `https://open.spotify.com/artist/${artistId}`;
+          if (Date.now() - now < 5000) {  // wait 5 seconds before showing modal
+            showModal();
           }
-        }, 1500);
-      } else {
-        window.location.href = `spotify:artist:${artistId}`;
+        }, 5000);
       }
     }
 
-    // Open album in Spotify app
     function openAlbum(event) {
       const albumUri = event.currentTarget.dataset.uri;
-      const fallback = event.currentTarget.dataset.fallback;
-
       if (isMobile()) {
+        window.location.href = albumUri;
+      } else {
         const now = Date.now();
         window.location.href = albumUri;
         setTimeout(() => {
-          if (Date.now() - now < 2000) {
-            window.location.href = fallback;
+          if (Date.now() - now < 5000) { // wait 5 seconds before showing modal
+            showModal();
           }
-        }, 1500);
-      } else {
-        window.location.href = albumUri;
+        }, 5000);
       }
+    }
+
+    function showModal() {
+      document.getElementById("spotify-modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("spotify-modal").style.display = "none";
     }
   </script>
 
@@ -181,6 +185,43 @@
       box-shadow: 0 0 15px #1DB954;
     }
 
+    /* Modal styles */
+    #spotify-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #spotify-modal .modal-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      color: #fff;
+    }
+
+    #spotify-modal a {
+      color: #1DB954;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    #spotify-modal a:hover {
+      text-decoration: underline;
+    }
+
+    #spotify-modal button {
+      margin-top: 20px;
+      background: #FF0000;
+    }
+
     @media (max-width: 600px) {
       .artist-name {
         font-size: 50px;
@@ -250,16 +291,26 @@
     Cover art by <a href="https://www.instagram.com/art_hannat/" target="_blank" rel="noopener noreferrer">art_hannat</a>
   </div>
 
-  <!-- Album Art Gallery with Deep Links -->
+  <!-- Album Art Gallery -->
   <div class="album-gallery">
-    <div class="album-art" data-uri="spotify:album:4ufWygBxGALTzvrVksss3M" data-fallback="https://open.spotify.com/album/4ufWygBxGALTzvrVksss3M" onclick="openAlbum(event)">
+    <div class="album-art" data-uri="spotify:album:4ufWygBxGALTzvrVksss3M" onclick="openAlbum(event)">
       <img src="album1.jpg" alt="">
     </div>
-    <div class="album-art" data-uri="spotify:album:2mN69FKkCwA8Gi8uQGxSnD" data-fallback="https://open.spotify.com/album/2mN69FKkCwA8Gi8uQGxSnD" onclick="openAlbum(event)">
+    <div class="album-art" data-uri="spotify:album:2mN69FKkCwA8Gi8uQGxSnD" onclick="openAlbum(event)">
       <img src="album2.jpg" alt="">
     </div>
-    <div class="album-art" data-uri="spotify:album:5YsaYtnpYpXaUFpZiojtLv" data-fallback="https://open.spotify.com/album/5YsaYtnpYpXaUFpZiojtLv" onclick="openAlbum(event)">
+    <div class="album-art" data-uri="spotify:album:5YsaYtnpYpXaUFpZiojtLv" onclick="openAlbum(event)">
       <img src="album3.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Desktop modal for Spotify download -->
+  <div id="spotify-modal">
+    <div class="modal-content">
+      <p>It looks like Spotify is not installed. You can download it here:</p>
+      <a href="https://www.spotify.com/download/" target="_blank">Download Spotify</a>
+      <br>
+      <button onclick="closeModal()">Close</button>
     </div>
   </div>
 </body>
