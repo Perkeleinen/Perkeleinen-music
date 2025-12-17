@@ -5,12 +5,10 @@
   <title>Perkeleinen - Listen on Spotify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Old English / Gothic Font -->
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
   <script>
     const artistId = "0YjzmE35TqYNHAnIZS4wwq";
-    const spotifyDownloadUrl = "https://www.spotify.com/download/";
 
     function isMobile() {
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -63,12 +61,33 @@
       color: #fff;
     }
 
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 2px 2px 8px #1DB954, 0 0 12px #1DB954;
+      }
+      50% {
+        text-shadow: 2px 2px 16px #1DB954, 0 0 24px #1DB954;
+      }
+    }
+
+    @keyframes albumPulse {
+      0%, 100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #1DB954;
+      }
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px #1DB954;
+      }
+    }
+
     .artist-name {
       font-size: 70px;
       margin-bottom: 40px;
       letter-spacing: 2px;
-      text-shadow: 2px 2px 8px #1DB954, 0 0 12px #1DB954;
       color: #fff;
+      text-shadow: 2px 2px 8px #1DB954, 0 0 12px #1DB954;
+      animation: pulseGlow 2s infinite;
     }
 
     h2 {
@@ -172,6 +191,7 @@
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
+      box-shadow: 0 0 15px #1DB954;
     }
 
     .album-art img {
@@ -181,11 +201,9 @@
     }
 
     .album-art:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #1DB954;
+      animation: albumPulse 1.5s infinite;
     }
 
-    /* Modal styles */
     #spotify-modal {
       display: none;
       position: fixed;
@@ -222,7 +240,6 @@
       background: #FF0000;
     }
 
-    /* GitHub link at bottom */
     .github-link {
       margin-top: 50px;
       font-size: 16px;
@@ -258,6 +275,10 @@
         max-width: none;
         margin-bottom: 20px;
       }
+
+      .album-gallery .album-art:first-child {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
@@ -266,17 +287,6 @@
   <div class="artist-name">Perkeleinen</div>
 
   <h2>Listen on Spotify</h2>
-
-  <div class="embed-container">
-    <iframe
-      src="https://open.spotify.com/embed/artist/0YjzmE35TqYNHAnIZS4wwq"
-      width="100%"
-      height="352"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-  </div>
 
   <p>Tap the button below to open the Spotify app.</p>
 
@@ -308,7 +318,6 @@
     Cover art by <a href="https://www.instagram.com/art_hannat/" target="_blank" rel="noopener noreferrer">art_hannat</a>
   </div>
 
-  <!-- Album Art Gallery -->
   <div class="album-gallery">
     <div class="album-art" data-uri="spotify:album:4ufWygBxGALTzvrVksss3M" onclick="openAlbum(event)">
       <img src="album1.jpg" alt="">
@@ -321,7 +330,6 @@
     </div>
   </div>
 
-  <!-- Desktop modal for Spotify download -->
   <div id="spotify-modal">
     <div class="modal-content">
       <p>It looks like Spotify is not installed. You can download it here:</p>
@@ -331,10 +339,19 @@
     </div>
   </div>
 
-  <!-- GitHub Repository Link -->
-  <div class="github-link">
-	<p>Like this page? Feel free to use it as base for your own <a href="https://github.com/Perkeleinen/Perkeleinen-music" target="_blank">https://github.com/Perkeleinen/Perkeleinen-music</a></p>
+  <div class="embed-container">
+    <iframe
+      src="https://open.spotify.com/embed/artist/0YjzmE35TqYNHAnIZS4wwq?theme=0"
+      width="100%"
+      height="352"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
 
+  <div class="github-link">
+    <p>Like this page? Feel free to use it as base for your own <a href="https://github.com/Perkeleinen/Perkeleinen-music" target="_blank">https://github.com/Perkeleinen/Perkeleinen-music</a></p>
   </div>
 
 </body>
