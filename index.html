@@ -23,7 +23,7 @@
         const now = Date.now();
         window.location.href = `spotify:artist:${artistId}`;
         setTimeout(() => {
-          if (Date.now() - now < 5000) {  // wait 5 seconds before showing modal
+          if (Date.now() - now < 5000) {
             showModal();
           }
         }, 5000);
@@ -38,7 +38,7 @@
         const now = Date.now();
         window.location.href = albumUri;
         setTimeout(() => {
-          if (Date.now() - now < 5000) { // wait 5 seconds before showing modal
+          if (Date.now() - now < 5000) {
             showModal();
           }
         }, 5000);
@@ -222,6 +222,23 @@
       background: #FF0000;
     }
 
+    /* GitHub link at bottom */
+    .github-link {
+      margin-top: 50px;
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    .github-link a {
+      color: #1DB954;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .github-link a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 600px) {
       .artist-name {
         font-size: 50px;
@@ -313,5 +330,12 @@
       <button onclick="closeModal()">Close</button>
     </div>
   </div>
+
+  <!-- GitHub Repository Link -->
+  <div class="github-link">
+	<p>Like this page? Feel free to use it as base for your own <a href="https://github.com/Perkeleinen/Perkeleinen-music" target="_blank">https://github.com/Perkeleinen/Perkeleinen-music</a></p>
+
+  </div>
+
 </body>
 </html>
