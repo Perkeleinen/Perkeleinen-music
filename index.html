@@ -16,22 +16,37 @@
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
 
-    // Open artist in Spotify app with web fallback
+    // Open artist in Spotify app
     function openSpotify() {
-      window.location.href = `spotify:artist:${artistId}`;
       if (isMobile()) {
+        const now = Date.now();
+        window.location.href = `spotify:artist:${artistId}`;
         setTimeout(() => {
-          window.location.href = `https://open.spotify.com/artist/${artistId}`;
+          if (Date.now() - now < 2000) {
+            window.location.href = `https://open.spotify.com/artist/${artistId}`;
+          }
         }, 1500);
+      } else {
+        window.location.href = `spotify:artist:${artistId}`;
       }
     }
 
-    // Open album in Spotify app with web fallback
-    function openAlbum(albumUri, fallbackUrl) {
-      window.location.href = albumUri;
-      setTimeout(() => {
-        window.location.href = fallbackUrl;
-      }, 1500);
+    // Open album in Spotify app
+    function openAlbum(event) {
+      const albumUri = event.currentTarget.dataset.uri;
+      const fallback = event.currentTarget.dataset.fallback;
+
+      if (isMobile()) {
+        const now = Date.now();
+        window.location.href = albumUri;
+        setTimeout(() => {
+          if (Date.now() - now < 2000) {
+            window.location.href = fallback;
+          }
+        }, 1500);
+      } else {
+        window.location.href = albumUri;
+      }
     }
   </script>
 
@@ -144,9 +159,9 @@
     }
 
     .album-art {
-      flex: 1 1 150px;   /* responsive width */
+      flex: 1 1 150px;
       max-width: 200px;
-      aspect-ratio: 1 / 1; /* keep square */
+      aspect-ratio: 1 / 1;
       background-color: #111;
       border: 2px solid #1DB954;
       border-radius: 12px;
@@ -158,7 +173,7 @@
     .album-art img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* keeps entire image visible */
+      object-fit: contain;
     }
 
     .album-art:hover {
@@ -237,13 +252,13 @@
 
   <!-- Album Art Gallery with Deep Links -->
   <div class="album-gallery">
-    <div class="album-art" onclick="openAlbum('spotify:album:4ufWygBxGALTzvrVksss3M', 'https://open.spotify.com/album/4ufWygBxGALTzvrVksss3M')">
+    <div class="album-art" data-uri="spotify:album:4ufWygBxGALTzvrVksss3M" data-fallback="https://open.spotify.com/album/4ufWygBxGALTzvrVksss3M" onclick="openAlbum(event)">
       <img src="album1.jpg" alt="">
     </div>
-    <div class="album-art" onclick="openAlbum('spotify:album:2mN69FKkCwA8Gi8uQGxSnD', 'https://open.spotify.com/album/2mN69FKkCwA8Gi8uQGxSnD')">
+    <div class="album-art" data-uri="spotify:album:2mN69FKkCwA8Gi8uQGxSnD" data-fallback="https://open.spotify.com/album/2mN69FKkCwA8Gi8uQGxSnD" onclick="openAlbum(event)">
       <img src="album2.jpg" alt="">
     </div>
-    <div class="album-art" onclick="openAlbum('spotify:album:5YsaYtnpYpXaUFpZiojtLv', 'https://open.spotify.com/album/5YsaYtnpYpXaUFpZiojtLv')">
+    <div class="album-art" data-uri="spotify:album:5YsaYtnpYpXaUFpZiojtLv" data-fallback="https://open.spotify.com/album/5YsaYtnpYpXaUFpZiojtLv" onclick="openAlbum(event)">
       <img src="album3.jpg" alt="">
     </div>
   </div>
