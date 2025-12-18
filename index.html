@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Perkeleinen - Listen on Spotify</title>
+  <title>Perkeleinen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -63,21 +63,25 @@
 
     @keyframes pulseGlow {
       0%, 100% {
-        text-shadow: 2px 2px 8px #1DB954, 0 0 12px #1DB954;
+        text-shadow:
+          2px 2px 6px #1DB954,
+          0 0 10px #88FF55; /* slightly more yellow */
       }
       50% {
-        text-shadow: 2px 2px 16px #1DB954, 0 0 24px #1DB954;
+        text-shadow:
+          2px 2px 10px #1DB954,
+          0 0 16px #88FF55; /* slightly more yellow */
       }
     }
 
     @keyframes albumPulse {
       0%, 100% {
         transform: scale(1.05);
-        box-shadow: 0 0 15px #1DB954;
+        box-shadow: 0 0 12px #1DB954, 0 0 18px #88FF55;
       }
       50% {
         transform: scale(1.08);
-        box-shadow: 0 0 25px #1DB954;
+        box-shadow: 0 0 18px #1DB954, 0 0 26px #88FF55;
       }
     }
 
@@ -86,13 +90,7 @@
       margin-bottom: 40px;
       letter-spacing: 2px;
       color: #fff;
-      text-shadow: 2px 2px 8px #1DB954, 0 0 12px #1DB954;
       animation: pulseGlow 2s infinite;
-    }
-
-    h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
     }
 
     p {
@@ -124,9 +122,8 @@
     }
 
     button:hover {
-      opacity: 0.9;
       transform: scale(1.05);
-      box-shadow: 0 0 15px #1DB954;
+      box-shadow: 0 0 15px #88FF55;
     }
 
     .youtube-link {
@@ -143,15 +140,8 @@
     }
 
     .youtube-link:hover {
-      opacity: 0.9;
       transform: scale(1.05);
       box-shadow: 0 0 15px #FF0000;
-    }
-
-    .desktop-hint {
-      font-size: 14px;
-      opacity: 0.7;
-      margin-top: 10px;
     }
 
     .credits {
@@ -163,14 +153,6 @@
     .credits a {
       color: #1DB954;
       text-decoration: none;
-    }
-
-    .credits a:hover {
-      text-decoration: underline;
-    }
-
-    a {
-      color: #1DB954;
     }
 
     .album-gallery {
@@ -189,9 +171,8 @@
       border: 2px solid #1DB954;
       border-radius: 12px;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
-      box-shadow: 0 0 15px #1DB954;
+      box-shadow: 0 0 12px #1DB954;
     }
 
     .album-art img {
@@ -207,13 +188,11 @@
     #spotify-modal {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
       z-index: 999;
-      flex-direction: column;
-      padding: 20px;
     }
 
     #spotify-modal .modal-content {
@@ -222,7 +201,6 @@
       border-radius: 20px;
       text-align: center;
       max-width: 400px;
-      color: #fff;
     }
 
     #spotify-modal a {
@@ -231,13 +209,39 @@
       text-decoration: none;
     }
 
-    #spotify-modal a:hover {
-      text-decoration: underline;
-    }
-
     #spotify-modal button {
       margin-top: 20px;
       background: #FF0000;
+    }
+
+    .lyrics-section {
+      margin-top: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lyrics details {
+      margin-bottom: 15px;
+      border: 1px solid #1DB954;
+      border-radius: 12px;
+      padding: 10px;
+      background: #0b0b0b;
+    }
+
+    .lyrics summary {
+      cursor: pointer;
+      font-size: 22px;
+      color: #1DB954;
+    }
+
+    .lyrics iframe {
+      width: 100%;
+      height: 320px;
+      border: none;
+      margin-top: 10px;
+      background: #000;
+      font-family: monospace;
     }
 
     .github-link {
@@ -251,71 +255,25 @@
       text-decoration: none;
       font-weight: bold;
     }
-
-    .github-link a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 600px) {
-      .artist-name {
-        font-size: 50px;
-      }
-
-      h2 {
-        font-size: 28px;
-      }
-
-      button, .youtube-link {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
-
-      .album-art {
-        flex: 1 1 45%;
-        max-width: none;
-        margin-bottom: 20px;
-      }
-
-      .album-gallery .album-art:first-child {
-        flex: 1 1 100%;
-      }
-    }
   </style>
 </head>
 
 <body>
   <div class="artist-name">Perkeleinen</div>
 
-  <h2>Listen on Spotify</h2>
-
-  <p>Tap the button below to open the Spotify app.</p>
-
-  <button onclick="openSpotify()">
-    Open in Spotify App
-  </button>
-
-  <p class="desktop-hint">
-    On desktop, click “Open Spotify” when prompted.
-  </p>
+  <button onclick="openSpotify()">Open in Spotify App</button>
 
   <div>
-    <a
-      class="youtube-link"
-      href="https://www.youtube.com/@Perkeleinen"
-      target="_blank"
-      rel="noopener noreferrer">
+    <a class="youtube-link"
+       href="https://www.youtube.com/@Perkeleinen"
+       target="_blank"
+       rel="noopener noreferrer">
       Visit on YouTube
     </a>
   </div>
 
-  <p style="margin-top: 25px;">
-    Or <a href="https://open.spotify.com/artist/0YjzmE35TqYNHAnIZS4wwq">
-      open Spotify in browser
-    </a>
-  </p>
-
   <div class="credits">
-    Cover art by <a href="https://www.instagram.com/art_hannat/" target="_blank" rel="noopener noreferrer">art_hannat</a>
+    Cover art by <a href="https://www.instagram.com/art_hannat/" target="_blank">art_hannat</a>
   </div>
 
   <div class="album-gallery">
@@ -330,12 +288,24 @@
     </div>
   </div>
 
-  <div id="spotify-modal">
-    <div class="modal-content">
-      <p>It looks like Spotify is not installed. You can download it here:</p>
-      <a href="https://www.spotify.com/download/" target="_blank">Download Spotify</a>
-      <br>
-      <button onclick="closeModal()">Close</button>
+  <div class="lyrics-section">
+    <h2>Lyrics</h2>
+
+    <div class="lyrics">
+      <details>
+        <summary>A Steam of Butterflies</summary>
+        <iframe src="A Steam of Butterflies.txt"></iframe>
+      </details>
+
+      <details>
+        <summary>From Light to Dust</summary>
+        <iframe src="From Light to Dust.txt"></iframe>
+      </details>
+
+      <details>
+        <summary>Flow of the Frozen Stream</summary>
+        <iframe src="Flow of the frozen stream.txt"></iframe>
+      </details>
     </div>
   </div>
 
@@ -344,14 +314,27 @@
       src="https://open.spotify.com/embed/artist/0YjzmE35TqYNHAnIZS4wwq?theme=0"
       width="100%"
       height="352"
-      frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy">
     </iframe>
   </div>
 
   <div class="github-link">
-    <p>Like this page? Feel free to use it as base for your own <a href="https://github.com/Perkeleinen/Perkeleinen-music" target="_blank">https://github.com/Perkeleinen/Perkeleinen-music</a></p>
+    <p>
+      Like this page? Feel free to use it as base for your own
+      <a href="https://github.com/Perkeleinen/Perkeleinen-music" target="_blank">
+        https://github.com/Perkeleinen/Perkeleinen-music
+      </a>
+    </p>
+  </div>
+
+  <div id="spotify-modal">
+    <div class="modal-content">
+      <p>It looks like Spotify is not installed. You can download it here:</p>
+      <a href="https://www.spotify.com/download/" target="_blank">Download Spotify</a>
+      <br>
+      <button onclick="closeModal()">Close</button>
+    </div>
   </div>
 
 </body>
