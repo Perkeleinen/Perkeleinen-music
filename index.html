@@ -91,6 +91,8 @@
       letter-spacing: 2px;
       color: #fff;
       animation: pulseGlow 2s infinite;
+      word-wrap: break-word;
+      max-width: 100%;
     }
 
     p {
@@ -253,6 +255,12 @@
       color: #1DB954;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .artist-name {
+        font-size: 50px; /* smaller font for mobile */
+      }
     }
   </style>
 </head>
