@@ -235,13 +235,12 @@
       color: #1DB954;
     }
 
-    .lyrics iframe {
-      width: 100%;
-      height: 320px;
-      border: none;
+    .lyrics pre {
       margin-top: 10px;
-      background: #000;
+      text-align: left;
+      white-space: pre-wrap;
       font-family: monospace;
+      color: #fff;
     }
 
     .github-link {
@@ -294,20 +293,43 @@
     <div class="lyrics">
       <details>
         <summary>A Steam of Butterflies</summary>
-        <iframe src="A Steam of Butterflies.txt"></iframe>
+        <pre id="lyrics1">Loading...</pre>
       </details>
 
       <details>
         <summary>From Light to Dust</summary>
-        <iframe src="From Light to Dust.txt"></iframe>
+        <pre id="lyrics2">Loading...</pre>
       </details>
 
       <details>
         <summary>Flow of the Frozen Stream</summary>
-        <iframe src="Flow of the frozen stream.txt"></iframe>
+        <pre id="lyrics3">Loading...</pre>
       </details>
     </div>
   </div>
+
+  <script>
+    const lyricsFiles = [
+      { id: 'lyrics1', file: 'A Steam of Butterflies.txt' },
+      { id: 'lyrics2', file: 'From Light to Dust.txt' },
+      { id: 'lyrics3', file: 'Flow of the frozen stream.txt' }
+    ];
+
+    lyricsFiles.forEach(entry => {
+      fetch(entry.file)
+        .then(response => {
+          if (!response.ok) throw new Error('File not found: ' + entry.file);
+          return response.text();
+        })
+        .then(text => {
+          document.getElementById(entry.id).textContent = text;
+        })
+        .catch(err => {
+          document.getElementById(entry.id).textContent = 'Could not load lyrics.';
+          console.error(err);
+        });
+    });
+  </script>
 
   <div class="embed-container">
     <iframe
