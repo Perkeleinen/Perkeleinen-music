@@ -324,29 +324,33 @@
     </div>
   </div>
 
-  <script>
-	const lyricsFiles = [
-	  { id: 'lyrics0', file: 'the-insufficient.txt' },
-	  { id: 'lyrics1', file: 'a-steam-of-butterflies.txt' },
-	  { id: 'lyrics2', file: 'from-light-to-dust.txt' },
-	  { id: 'lyrics3', file: 'flow-of-the-frozen-stream.txt' }
-	];
+	<script>
+	document.addEventListener("DOMContentLoaded", () => {
+	  const lyricsFiles = [
+		{ id: 'lyrics0', file: 'the-insufficient.txt' },
+		{ id: 'lyrics1', file: 'a-steam-of-butterflies.txt' },
+		{ id: 'lyrics2', file: 'from-light-to-dust.txt' },
+		{ id: 'lyrics3', file: 'flow-of-the-frozen-stream.txt' }
+	  ];
 
-    lyricsFiles.forEach(entry => {
-      fetch(entry.file)
-        .then(response => {
-          if (!response.ok) throw new Error('File not found: ' + entry.file);
-          return response.text();
-        })
-        .then(text => {
-          document.getElementById(entry.id).textContent = text;
-        })
-        .catch(err => {
-          document.getElementById(entry.id).textContent = 'Could not load lyrics.';
-          console.error(err);
-        });
-    });
-  </script>
+	  lyricsFiles.forEach(entry => {
+		fetch(entry.file)
+		  .then(response => {
+			if (!response.ok) throw new Error('File not found: ' + entry.file);
+			return response.text();
+		  })
+		  .then(text => {
+			const el = document.getElementById(entry.id);
+			if (el) el.textContent = text;
+		  })
+		  .catch(err => {
+			const el = document.getElementById(entry.id);
+			if (el) el.textContent = 'Could not load lyrics.';
+			console.error(err);
+		  });
+	  });
+	});
+	</script>
 
   <div class="embed-container">
     <iframe
