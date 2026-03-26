@@ -284,7 +284,7 @@
   </div>
 
   <div class="album-gallery">
-    <div class="album-art" data-uri="https://distrokid.com/hyperfollow/perkeleinen/the-insufficient" onclick="openAlbum(event)">
+    <div class="album-art" data-uri="spotify:album:5YmeTMJeW2zmpEGvMPDDqQ" onclick="openAlbum(event)">
       <img src="album0.jpg" alt="">
     </div>
     <div class="album-art" data-uri="spotify:album:4ufWygBxGALTzvrVksss3M" onclick="openAlbum(event)">
@@ -307,7 +307,6 @@
         <pre id="lyrics0">Loading...</pre>
       </details>
 
-    <div class="lyrics">
       <details>
         <summary>A Steam of Butterflies</summary>
         <pre id="lyrics1">Loading...</pre>
@@ -326,12 +325,12 @@
   </div>
 
   <script>
-    const lyricsFiles = [
-      { id: 'lyrics0', file: 'The Insufficient.txt' },
-      { id: 'lyrics1', file: 'A Steam of Butterflies.txt' },
-      { id: 'lyrics2', file: 'From Light to Dust.txt' },
-      { id: 'lyrics3', file: 'Flow of the frozen stream.txt' }
-    ];
+	const lyricsFiles = [
+	  { id: 'lyrics0', file: 'the-insufficient.txt' },
+	  { id: 'lyrics1', file: 'a-steam-of-butterflies.txt' },
+	  { id: 'lyrics2', file: 'from-light-to-dust.txt' },
+	  { id: 'lyrics3', file: 'flow-of-the-frozen-stream.txt' }
+	];
 
     lyricsFiles.forEach(entry => {
       fetch(entry.file)
