@@ -262,6 +262,26 @@
         font-size: 50px; /* smaller font for mobile */
       }
     }
+
+    .bandcamp-embed-wrapper {
+        display: flex;
+        justify-content: center; /* horizontally centers iframe */
+        margin: 40px 0 0px 0;   /* top and bottom spacing */
+    }
+
+    .bandcamp-embed-wrapper iframe {
+        width: 100%;              /* desktop width */
+        max-width: 700px;        /* optional: prevent it from being too wide */
+        border-radius: 12px;
+    }
+
+    @media (max-width: 700px) {
+        .bandcamp-embed-wrapper iframe {
+            width: 100%;         /* full width on mobile */
+            max-width: none;
+        }
+    }
+	
   </style>
 </head>
 
@@ -278,6 +298,21 @@
       Visit on YouTube
     </a>
   </div>
+
+  <div class="bandcamp-embed-wrapper">
+    <iframe style="border: 20px; width: 100%; height: 120px;" 
+	  src="https://bandcamp.com/EmbeddedPlayer/album=842802886/size=large/bgcol=333333/linkcol=2ebd35/tracklist=false/artwork=small/transparent=true/" 
+	  seamless
+	>
+	  <a href="https://perkeleinen.bandcamp.com/album/the-insufficient"
+	  >
+	  The Insufficient by Perkeleinen
+	  </a>
+	</iframe>
+  </div>
+
+
+
 
   <div class="credits">
     Cover art by <a href="https://www.instagram.com/art_hannat/" target="_blank">art_hannat</a>
